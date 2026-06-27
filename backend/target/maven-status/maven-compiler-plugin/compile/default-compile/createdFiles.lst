@@ -1,0 +1,15 @@
+com\mediaplayerapp\model\AppSettings.class
+com\mediaplayerapp\model\Track.class
+com\mediaplayerapp\model\Playlist.class
+com\mediaplayerapp\service\PlaylistService.class
+com\mediaplayerapp\model\EQPreset.class
+com\mediaplayerapp\dao\TrackDao.class
+com\mediaplayerapp\dao\PlaylistDao.class
+com\mediaplayerapp\util\MetadataReader.class
+com\mediaplayerapp\service\SettingsService.class
+com\mediaplayerapp\util\FileUtils.class
+com\mediaplayerapp\service\LibraryScannerService.class
+com\mediaplayerapp\service\EqualizerService.class
+com\mediaplayerapp\service\MediaPlayerService.class
+com\mediaplayerapp\dao\SettingsDao.class
+com\mediaplayerapp\db\DatabaseManager.class
