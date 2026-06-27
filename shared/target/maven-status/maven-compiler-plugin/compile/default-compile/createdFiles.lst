@@ -1,0 +1,4 @@
+com\mediaplayerapp\shared\event\PlaybackEvent$Type.class
+com\mediaplayerapp\shared\event\PlaybackEvent.class
+com\mediaplayerapp\shared\event\TrackChangeEvent.class
+com\mediaplayerapp\shared\AppConstants.class
