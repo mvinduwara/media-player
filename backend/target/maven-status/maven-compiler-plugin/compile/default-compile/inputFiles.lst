@@ -1,0 +1,15 @@
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\dao\PlaylistDao.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\dao\SettingsDao.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\dao\TrackDao.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\db\DatabaseManager.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\model\AppSettings.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\model\EQPreset.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\model\Playlist.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\model\Track.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\service\EqualizerService.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\service\LibraryScannerService.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\service\MediaPlayerService.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\service\PlaylistService.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\service\SettingsService.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\util\FileUtils.java
+D:\PROJECTS (JAVA)\MEDIA-PLAYER\media-player-app\backend\src\main\java\com\mediaplayerapp\util\MetadataReader.java
