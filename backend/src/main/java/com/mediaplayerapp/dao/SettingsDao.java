@@ -16,7 +16,7 @@ public class SettingsDao {
     }
 
     private void set(String key, String value) {
-        String sql = "MERGE INTO app_settings (key, value) KEY(key) VALUES (?, ?)";
+        String sql = "MERGE INTO app_settings (setting_key, setting_value) KEY(setting_key) VALUES (?, ?)";
         try (PreparedStatement ps = conn().prepareStatement(sql)) {
             ps.setString(1, key);
             ps.setString(2, value);
@@ -28,11 +28,11 @@ public class SettingsDao {
 
     private String get(String key, String defaultValue) {
         try (PreparedStatement ps = conn().prepareStatement(
-                "SELECT value FROM app_settings WHERE key=?")) {
+                "SELECT setting_value FROM app_settings WHERE setting_key=?")) {
             ps.setString(1, key);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                String v = rs.getString("value");
+                String v = rs.getString("setting_value");
                 return v != null ? v : defaultValue;
             }
         } catch (SQLException e) {
@@ -42,18 +42,18 @@ public class SettingsDao {
     }
 
     public void save(AppSettings settings) {
-        set("default_music_folder", settings.getDefaultMusicFolder());
-        set("volume", String.valueOf(settings.getVolume()));
-        set("shuffle", String.valueOf(settings.isShuffle()));
-        set("repeat_mode", settings.getRepeatMode());
-        set("crossfade_seconds", String.valueOf(settings.getCrossfadeSeconds()));
-        set("equalizer_enabled", String.valueOf(settings.isEqualizerEnabled()));
-        set("last_active_eq_preset_id", String.valueOf(settings.getLastActiveEQPresetId()));
-        set("last_played_track_id", String.valueOf(settings.getLastPlayedTrackId()));
+        set("default_music_folder",      settings.getDefaultMusicFolder());
+        set("volume",                    String.valueOf(settings.getVolume()));
+        set("shuffle",                   String.valueOf(settings.isShuffle()));
+        set("repeat_mode",               settings.getRepeatMode());
+        set("crossfade_seconds",         String.valueOf(settings.getCrossfadeSeconds()));
+        set("equalizer_enabled",         String.valueOf(settings.isEqualizerEnabled()));
+        set("last_active_eq_preset_id",  String.valueOf(settings.getLastActiveEQPresetId()));
+        set("last_played_track_id",      String.valueOf(settings.getLastPlayedTrackId()));
         set("last_played_position_millis", String.valueOf(settings.getLastPlayedPositionMillis()));
-        set("last_active_playlist_id", String.valueOf(settings.getLastActivePlaylistId()));
-        set("accent_color", settings.getAccentColor());
-        set("theme", settings.getTheme());
+        set("last_active_playlist_id",   String.valueOf(settings.getLastActivePlaylistId()));
+        set("accent_color",              settings.getAccentColor());
+        set("theme",                     settings.getTheme());
     }
 
     public AppSettings load() {
