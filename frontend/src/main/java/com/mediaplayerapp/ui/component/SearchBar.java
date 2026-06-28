@@ -5,7 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import org.kordamp.ikonli.javafx.FontIcon;
+import javafx.scene.control.Label;
 
 import java.util.function.Consumer;
 
@@ -18,8 +18,7 @@ public class SearchBar extends StackPane {
         field.setPromptText(promptText);
         field.getStyleClass().add("search-field");
 
-        FontIcon searchIcon = FXUtils.icon("fas-magnifying-glass", 13, "#5A5A6A");
-        StackPane.setAlignment(searchIcon, Pos.CENTER_LEFT);
+        Label searchIcon = FXUtils.icon("fas-magnifying-glass", 13, "#5A5A6A");        StackPane.setAlignment(searchIcon, Pos.CENTER_LEFT);
         StackPane.setMargin(searchIcon, new Insets(0, 0, 0, 12));
 
         StackPane.setAlignment(field, Pos.CENTER);

@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import org.kordamp.ikonli.javafx.FontIcon;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -82,7 +82,7 @@ public class NowPlayingView extends VBox {
         coverStack.setStyle("-fx-background-color: #1C1C1F; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 30, 0.3, 0, 8);");
         coverStack.setAlignment(Pos.CENTER);
 
-        FontIcon musicIcon = FXUtils.icon("fas-music", 64, "#2E2E33");
+        Label musicIcon = FXUtils.icon("fas-music", 64, "#2E2E33");
         coverStack.getChildren().addAll(musicIcon, coverView);
 
         visualizer = new SpectrumVisualizer(300, 80);

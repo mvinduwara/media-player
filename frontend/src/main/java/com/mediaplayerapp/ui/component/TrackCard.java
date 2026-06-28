@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
-import org.kordamp.ikonli.javafx.FontIcon;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +22,7 @@ public class TrackCard extends HBox {
     private final Label artistLabel = new Label();
     private final Label albumLabel = new Label();
     private final Label durationLabel = new Label();
-    private final FontIcon playingIcon = FXUtils.icon("fas-volume-high", 12, "#9D6FEF");
+    private final Label playingIcon = FXUtils.icon("fas-volume-high", 12, "#9D6FEF");
 
     public TrackCard(Track track, boolean showAlbum) {
         this.track = track;

@@ -1,7 +1,5 @@
 package com.mediaplayerapp.ui.util;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -9,36 +7,78 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Map;
 
 public class FXUtils {
 
     private FXUtils() {}
 
-    public static FontIcon icon(String ikonName, int size) {
-        FontIcon fi = new FontIcon(ikonName);
-        fi.setIconSize(size);
-        return fi;
+    // ── Unicode symbol map (replaces Ikonli entirely) ─
+    private static final Map<String, String> ICONS = Map.ofEntries(
+            Map.entry("fas-music",           "♪"),
+            Map.entry("fas-compact-disc",    "◉"),
+            Map.entry("fas-list",            "≡"),
+            Map.entry("fas-heart",           "♥"),
+            Map.entry("far-heart",           "♡"),
+            Map.entry("fas-sliders-h",       "⚙"),
+            Map.entry("fas-gear",            "⚙"),
+            Map.entry("fas-cog",             "⚙"),
+            Map.entry("fas-plus",            "+"),
+            Map.entry("fas-magnifying-glass","🔍"),
+            Map.entry("fas-folder-open",     "📂"),
+            Map.entry("fas-folder-plus",     "📁"),
+            Map.entry("fas-file-audio",      "🎵"),
+            Map.entry("fas-play",            "▶"),
+            Map.entry("fas-pause",           "⏸"),
+            Map.entry("fas-stop",            "⏹"),
+            Map.entry("fas-backward-step",   "⏮"),
+            Map.entry("fas-forward-step",    "⏭"),
+            Map.entry("fas-step-backward",   "⏮"),
+            Map.entry("fas-step-forward",    "⏭"),
+            Map.entry("fas-shuffle",         "⇄"),
+            Map.entry("fas-repeat",          "↺"),
+            Map.entry("fas-repeat-1",        "↻"),
+            Map.entry("fas-volume-high",     "🔊"),
+            Map.entry("fas-volume-up",       "🔊"),
+            Map.entry("fas-volume-mute",     "🔇"),
+            Map.entry("fas-volume-xmark",    "🔇"),
+            Map.entry("fas-volume-off",      "🔈"),
+            Map.entry("fas-xmark",           "✕"),
+            Map.entry("fas-trash",           "🗑"),
+            Map.entry("fas-pen",             "✎"),
+            Map.entry("fas-circle-info",     "ℹ"),
+            Map.entry("fas-ellipsis",        "•••"),
+            Map.entry("fas-floppy-disk",     "💾"),
+            Map.entry("fas-rotate-left",     "↺"),
+            Map.entry("fas-water",           "≈"),
+            Map.entry("fas-wave-square",     "≈"),
+            Map.entry("fas-list-music",      "♫"),
+            Map.entry("far-folder-open",     "📂"),
+            Map.entry("fas-folder",          "📁")
+    );
+
+    public static Label icon(String name, int size) {
+        return icon(name, size, "#9898A6");
     }
 
-    public static FontIcon icon(String ikonName, int size, String color) {
-        FontIcon fi = new FontIcon(ikonName);
-        fi.setIconSize(size);
-        fi.setIconColor(Color.web(color));
-        return fi;
-    }
-
-    public static Label iconLabel(String ikonName, int size) {
-        FontIcon fi = icon(ikonName, size);
-        Label lbl = new Label();
-        lbl.setGraphic(fi);
+    public static Label icon(String name, int size, String color) {
+        String symbol = ICONS.getOrDefault(name, "•");
+        Label lbl = new Label(symbol);
+        lbl.setStyle(
+                "-fx-font-size: " + size + "px;" +
+                        "-fx-text-fill: " + color + ";" +
+                        "-fx-padding: 0;"
+        );
+        lbl.setMouseTransparent(true);
         return lbl;
+    }
+
+    public static Label iconLabel(String name, int size) {
+        return icon(name, size);
     }
 
     public static ImageView loadCoverArt(String path, double size) {
@@ -63,14 +103,13 @@ public class FXUtils {
                 }
             } catch (Exception ignored) {}
         }
-
-        iv.setImage(null);
         return iv;
     }
 
     public static void fadeIn(Node node, double durationMs) {
         node.setOpacity(0);
-        FadeTransition ft = new FadeTransition(Duration.millis(durationMs), node);
+        javafx.animation.FadeTransition ft =
+                new javafx.animation.FadeTransition(javafx.util.Duration.millis(durationMs), node);
         ft.setFromValue(0);
         ft.setToValue(1);
         ft.play();
@@ -79,7 +118,8 @@ public class FXUtils {
     public static void scaleIn(Node node, double durationMs) {
         node.setScaleX(0.94);
         node.setScaleY(0.94);
-        ScaleTransition st = new ScaleTransition(Duration.millis(durationMs), node);
+        javafx.animation.ScaleTransition st =
+                new javafx.animation.ScaleTransition(javafx.util.Duration.millis(durationMs), node);
         st.setFromX(0.94);
         st.setFromY(0.94);
         st.setToX(1.0);
@@ -89,7 +129,6 @@ public class FXUtils {
 
     public static void tooltip(Node node, String text) {
         Tooltip tt = new Tooltip(text);
-        tt.setStyle("-fx-font-size: 12px;");
         Tooltip.install(node, tt);
     }
 
@@ -100,11 +139,11 @@ public class FXUtils {
         return r;
     }
 
-    public static Insets insets(double all) {
+    public static javafx.geometry.Insets insets(double all) {
         return new Insets(all);
     }
 
-    public static Insets insets(double topBottom, double leftRight) {
+    public static javafx.geometry.Insets insets(double topBottom, double leftRight) {
         return new Insets(topBottom, leftRight, topBottom, leftRight);
     }
 }

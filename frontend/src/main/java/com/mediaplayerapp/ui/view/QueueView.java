@@ -8,7 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import org.kordamp.ikonli.javafx.FontIcon;
+
 
 public class QueueView extends VBox {
 
@@ -142,7 +142,7 @@ public class QueueView extends VBox {
         VBox empty = new VBox(12);
         empty.setAlignment(Pos.CENTER);
         empty.setPadding(new Insets(60));
-        FontIcon icon = FXUtils.icon("fas-list", 48, "#2E2E33");
+        Label icon = FXUtils.icon("fas-list", 48, "#2E2E33");
         Label title = new Label("Queue is empty");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: 600; -fx-text-fill: #5A5A6A;");
         Label sub = new Label("Play tracks or playlists to fill the queue");

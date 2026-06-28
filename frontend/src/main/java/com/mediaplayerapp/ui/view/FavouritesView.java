@@ -10,7 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import org.kordamp.ikonli.javafx.FontIcon;
+
 
 import java.util.List;
 
@@ -124,7 +124,7 @@ public class FavouritesView extends VBox {
         VBox empty = new VBox(16);
         empty.setAlignment(Pos.CENTER);
         empty.setPadding(new Insets(60));
-        FontIcon icon = FXUtils.icon("far-heart", 48, "#2E2E33");
+        Label icon = FXUtils.icon("far-heart", 48, "#2E2E33");
         Label title = new Label("No favourites yet");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: 600; -fx-text-fill: #5A5A6A;");
         Label sub = new Label("Heart a track to add it here");

@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
-import org.kordamp.ikonli.javafx.FontIcon;
+
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -50,7 +50,7 @@ public class SideNav extends VBox {
         logoBox.getStyleClass().add("nav-logo-box");
         logoBox.setAlignment(Pos.CENTER_LEFT);
 
-        FontIcon waveIcon = FXUtils.icon("fas-wave-square", 20, "#7C3AED");
+        Label waveIcon = FXUtils.icon("fas-wave-square", 20, "#7C3AED");
         Text logoText = new Text("Wave");
         logoText.getStyleClass().add("nav-logo-text");
         Text logoAccent = new Text("line");
@@ -127,7 +127,7 @@ public class SideNav extends VBox {
 
         HBox content = new HBox(10);
         content.setAlignment(Pos.CENTER_LEFT);
-        FontIcon ico = FXUtils.icon(iconName, 14, "#9898A6");
+        Label ico = FXUtils.icon(iconName, 14, "#9898A6");
         Label lbl = new Label(label);
         lbl.setMouseTransparent(true);
         content.getChildren().addAll(ico, lbl);

@@ -19,7 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
-import org.kordamp.ikonli.javafx.FontIcon;
+
 
 import java.io.File;
 import java.util.List;
@@ -281,7 +281,7 @@ public class LibraryView extends VBox {
         empty.setAlignment(Pos.CENTER);
         empty.setPadding(new Insets(60));
 
-        FontIcon icon = FXUtils.icon("fas-music", 48, "#2E2E33");
+        Label icon = FXUtils.icon("fas-music", 48, "#2E2E33");
         Label title = new Label("Your library is empty");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: 600; -fx-text-fill: #5A5A6A;");
         Label sub = new Label("Click \"Add Folder\" to scan your music collection");
