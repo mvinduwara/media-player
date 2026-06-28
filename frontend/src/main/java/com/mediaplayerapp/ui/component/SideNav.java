@@ -68,15 +68,15 @@ public class SideNav extends VBox {
 
         Label libLabel = navSectionLabel("Library");
         nav.getChildren().add(libLabel);
-        nav.getChildren().add(navBtn("fas-music", "Library", NavItem.LIBRARY));
+        nav.getChildren().add(navBtn("fas-music",        "Library",     NavItem.LIBRARY));
         nav.getChildren().add(navBtn("fas-compact-disc", "Now Playing", NavItem.NOW_PLAYING));
-        nav.getChildren().add(navBtn("fas-list", "Queue", NavItem.QUEUE));
-        nav.getChildren().add(navBtn("fas-heart", "Favourites", NavItem.FAVOURITES));
+        nav.getChildren().add(navBtn("fas-list",         "Queue",       NavItem.QUEUE));
+        nav.getChildren().add(navBtn("fas-heart",        "Favourites",  NavItem.FAVOURITES));
 
         Label toolsLabel = navSectionLabel("Tools");
         nav.getChildren().add(toolsLabel);
-        nav.getChildren().add(navBtn("fas-sliders", "Equalizer", NavItem.EQUALIZER));
-        nav.getChildren().add(navBtn("fas-gear", "Settings", NavItem.SETTINGS));
+        nav.getChildren().add(navBtn("fas-sliders-h",   "Equalizer",   NavItem.EQUALIZER));
+        nav.getChildren().add(navBtn("fas-gear",         "Settings",    NavItem.SETTINGS));
 
         return nav;
     }
@@ -169,14 +169,14 @@ public class SideNav extends VBox {
             btn.getStyleClass().add("nav-playlist-item");
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setAlignment(Pos.CENTER_LEFT);
-            btn.setGraphic(FXUtils.icon("fas-list-music", 12, "#5A5A6A"));
+            btn.setGraphic(FXUtils.icon("fas-list", 12, "#5A5A6A"));
             btn.setGraphicTextGap(10);
             btn.setOnAction(e -> { if (onPlaylistSelect != null) onPlaylistSelect.accept(pl); });
             playlistContainer.getChildren().add(btn);
         }
     }
 
-    public void setOnNavSelect(Consumer<NavItem> handler) { this.onNavSelect = handler; }
-    public void setOnPlaylistSelect(Consumer<Playlist> handler) { this.onPlaylistSelect = handler; }
-    public void setOnNewPlaylist(Runnable handler) { this.onNewPlaylist = handler; }
+    public void setOnNavSelect(Consumer<NavItem> handler)      { this.onNavSelect = handler; }
+    public void setOnPlaylistSelect(Consumer<Playlist> handler){ this.onPlaylistSelect = handler; }
+    public void setOnNewPlaylist(Runnable handler)              { this.onNewPlaylist = handler; }
 }

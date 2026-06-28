@@ -176,8 +176,9 @@ public class SettingsView extends VBox {
         saveBtn.setOnAction(e -> {
             saveSettings();
             statusLabel.setText("✓ Settings saved");
-            new javafx.animation.PauseTransition(javafx.util.Duration.seconds(2.5))
-            {{ setOnFinished(ev -> statusLabel.setText("")); play(); }};
+            javafx.animation.PauseTransition pause = new javafx.animation.PauseTransition(javafx.util.Duration.seconds(2.5));
+            pause.setOnFinished(ev -> statusLabel.setText(""));
+            pause.play();
         });
 
         HBox row = new HBox(12, saveBtn, statusLabel);
