@@ -19,11 +19,10 @@ public class TrackDao {
     }
 
     public Track insert(Track track) {
-        String sql = """
-            INSERT INTO tracks (title, artist, album, genre, year, file_path,
-                duration_millis, track_number, file_size, cover_art_path)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """;
+        String sql =
+                "INSERT INTO tracks (title, artist, album, genre, release_year, file_path," +
+                        "    duration_millis, track_number, file_size, cover_art_path)" +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = conn().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, track.getTitle());
             ps.setString(2, track.getArtist());
@@ -45,11 +44,10 @@ public class TrackDao {
     }
 
     public void update(Track track) {
-        String sql = """
-            UPDATE tracks SET title=?, artist=?, album=?, genre=?, year=?,
-                duration_millis=?, track_number=?, cover_art_path=?,
-                play_count=?, favourite=? WHERE id=?
-        """;
+        String sql =
+                "UPDATE tracks SET title=?, artist=?, album=?, genre=?, release_year=?," +
+                        "    duration_millis=?, track_number=?, cover_art_path=?," +
+                        "    play_count=?, favourite=? WHERE id=?";
         try (PreparedStatement ps = conn().prepareStatement(sql)) {
             ps.setString(1, track.getTitle());
             ps.setString(2, track.getArtist());
@@ -89,7 +87,8 @@ public class TrackDao {
     }
 
     public Optional<Track> findByFilePath(String filePath) {
-        try (PreparedStatement ps = conn().prepareStatement("SELECT * FROM tracks WHERE file_path=?")) {
+        try (PreparedStatement ps = conn().prepareStatement(
+                "SELECT * FROM tracks WHERE file_path=?")) {
             ps.setString(1, filePath);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) return Optional.of(mapRow(rs));
@@ -109,11 +108,10 @@ public class TrackDao {
 
     public List<Track> search(String query) {
         String like = "%" + query.toLowerCase() + "%";
-        String sql = """
-            SELECT * FROM tracks WHERE
-                LOWER(title) LIKE ? OR LOWER(artist) LIKE ? OR LOWER(album) LIKE ?
-            ORDER BY artist, title
-        """;
+        String sql =
+                "SELECT * FROM tracks WHERE" +
+                        "    LOWER(title) LIKE ? OR LOWER(artist) LIKE ? OR LOWER(album) LIKE ?" +
+                        "ORDER BY artist, title";
         List<Track> results = new ArrayList<>();
         try (PreparedStatement ps = conn().prepareStatement(sql)) {
             ps.setString(1, like);
@@ -128,12 +126,11 @@ public class TrackDao {
     }
 
     public List<Track> findByPlaylist(long playlistId) {
-        String sql = """
-            SELECT t.* FROM tracks t
-            JOIN playlist_tracks pt ON t.id = pt.track_id
-            WHERE pt.playlist_id = ?
-            ORDER BY pt.position
-        """;
+        String sql =
+                "SELECT t.* FROM tracks t" +
+                        "    JOIN playlist_tracks pt ON t.id = pt.track_id" +
+                        "    WHERE pt.playlist_id = ?" +
+                        "    ORDER BY pt.sort_position";
         List<Track> results = new ArrayList<>();
         try (PreparedStatement ps = conn().prepareStatement(sql)) {
             ps.setLong(1, playlistId);
@@ -184,7 +181,7 @@ public class TrackDao {
         t.setArtist(rs.getString("artist"));
         t.setAlbum(rs.getString("album"));
         t.setGenre(rs.getString("genre"));
-        t.setYear(rs.getString("year"));
+        t.setYear(rs.getString("release_year"));
         t.setFilePath(rs.getString("file_path"));
         t.setDurationMillis(rs.getLong("duration_millis"));
         t.setTrackNumber(rs.getInt("track_number"));
