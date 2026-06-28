@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +19,7 @@ public class PlaylistDao {
     }
 
     public Playlist insert(Playlist playlist) {
-        String sql = "INSERT INTO playlists (name, description) VALUES (?, ?)";
+        String sql = "INSERT INTO playlists (playlist_name, description) VALUES (?, ?)";
         try (PreparedStatement ps = conn().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, playlist.getName());
             ps.setString(2, playlist.getDescription());
@@ -34,7 +33,7 @@ public class PlaylistDao {
     }
 
     public void update(Playlist playlist) {
-        String sql = "UPDATE playlists SET name=?, description=?, updated_at=CURRENT_TIMESTAMP WHERE id=?";
+        String sql = "UPDATE playlists SET playlist_name=?, description=?, updated_at=CURRENT_TIMESTAMP WHERE id=?";
         try (PreparedStatement ps = conn().prepareStatement(sql)) {
             ps.setString(1, playlist.getName());
             ps.setString(2, playlist.getDescription());
@@ -68,7 +67,7 @@ public class PlaylistDao {
     public List<Playlist> findAll() {
         List<Playlist> list = new ArrayList<>();
         try (Statement stmt = conn().createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM playlists ORDER BY name")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM playlists ORDER BY playlist_name")) {
             while (rs.next()) list.add(mapRow(rs));
         } catch (SQLException e) {
             log.error("Failed to list playlists", e);
@@ -77,11 +76,10 @@ public class PlaylistDao {
     }
 
     public void addTrack(long playlistId, long trackId) {
-        String sql = """
-            MERGE INTO playlist_tracks (playlist_id, track_id, position)
-            KEY(playlist_id, track_id)
-            VALUES (?, ?, (SELECT COALESCE(MAX(position), 0) + 1 FROM playlist_tracks WHERE playlist_id=?))
-        """;
+        String sql =
+                "MERGE INTO playlist_tracks (playlist_id, track_id, sort_position) " +
+                        "KEY(playlist_id, track_id) " +
+                        "VALUES (?, ?, (SELECT COALESCE(MAX(sort_position), 0) + 1 FROM playlist_tracks WHERE playlist_id=?))";
         try (PreparedStatement ps = conn().prepareStatement(sql)) {
             ps.setLong(1, playlistId);
             ps.setLong(2, trackId);
@@ -104,7 +102,7 @@ public class PlaylistDao {
     }
 
     public void reorderTrack(long playlistId, long trackId, int newPosition) {
-        String sql = "UPDATE playlist_tracks SET position=? WHERE playlist_id=? AND track_id=?";
+        String sql = "UPDATE playlist_tracks SET sort_position=? WHERE playlist_id=? AND track_id=?";
         try (PreparedStatement ps = conn().prepareStatement(sql)) {
             ps.setInt(1, newPosition);
             ps.setLong(2, playlistId);
@@ -130,7 +128,7 @@ public class PlaylistDao {
     private Playlist mapRow(ResultSet rs) throws SQLException {
         Playlist p = new Playlist();
         p.setId(rs.getLong("id"));
-        p.setName(rs.getString("name"));
+        p.setName(rs.getString("playlist_name"));
         p.setDescription(rs.getString("description"));
         Timestamp created = rs.getTimestamp("created_at");
         Timestamp updated = rs.getTimestamp("updated_at");
